@@ -9,7 +9,7 @@ const Login = ({user, setUser}) => {
   const [showSignup, setShowSignup] = useState(false)
   const [googleUser, setGoogleUser] = useState(null)
   
-  //necessary to make google button appear when gsi is loaded from html
+  //necessary to make google button appear when gsi is loaded from html document
   useEffect(()=>{
     document.getElementById("gsiscript").onload = () => setGsiLoaded(true)
   },[])
@@ -18,9 +18,7 @@ const Login = ({user, setUser}) => {
     if(user) return
     const handleLogin = (res) =>{
       //login to backend with google credentials (res.credential.sub for unique google id)
-      //following function mimics the process as this is just a front-end example
       const credential = jwt_decode(res.credential)
-      //mimics search of if user with unique google id exists
       if(getUserById(credential.sub)) {
         setUser(getUserById(credential.sub))
         axios.defaults.headers.common['authetication'] = JSON.stringify(credential).slice(1,-1)
