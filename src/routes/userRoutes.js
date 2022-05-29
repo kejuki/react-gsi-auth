@@ -1,9 +1,8 @@
 //uses localstorage to mimic rest endpoints
 
 export const initBackendMimic = () => {
-  if(!localStorage.getItem("testAppUserDB")){
+  if(!localStorage.getItem("testAppUserDB"))
     localStorage.setItem("testAppUserDB", JSON.stringify({userArray : []}))
-  }
 }
 
 export const getAllUsers = () => {
