@@ -23,6 +23,7 @@ const Signup = ({googleUser, setUser}) => {
     <>
       <p>Insert username and press enter</p>
       <input
+      autoFocus
       type='text'
       className="signup-text"
       value={username}
