@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import jwt_decode from "jwt-decode";
 import axios from 'axios'
 import Signup from "./Signup";
 import { getUserById } from "../routes/userRoutes";
+import { UserContext } from "../contexts/UserContext";
 
-const Login = ({user, setUser}) => {
+const Login = () => {
   const [gsiLoaded, setGsiLoaded] = useState(false)
   const [showSignup, setShowSignup] = useState(false)
   const [googleUser, setGoogleUser] = useState(null)
-  
+  const {user, setUser} = useContext(UserContext)
+
   //necessary to make google button appear when gsi is loaded from html document
-  useEffect(()=>{
-    document.getElementById("gsiscript").onload = () => setGsiLoaded(true)
-  },[])
+  useEffect(()=>{document.getElementById("gsiscript").onload = () => setGsiLoaded(true)},[])
 
   useEffect(()=>{
     if(user) return
@@ -20,7 +20,9 @@ const Login = ({user, setUser}) => {
       //login to backend with google credentials (res.credential.sub for unique google id)
       const credential = jwt_decode(res.credential)
       if(getUserById(credential.sub)) {
-        setUser(getUserById(credential.sub))
+        const currentUser = getUserById(credential.sub)
+        setUser(currentUser)
+        localStorage.setItem("currentUser", JSON.stringify(currentUser))
         axios.defaults.headers.common['authetication'] = JSON.stringify(credential).slice(1,-1)
       } 
       else {
@@ -45,7 +47,7 @@ const Login = ({user, setUser}) => {
 
   return(
     showSignup ? 
-      <Signup googleUser={googleUser} setUser={setUser} /> :
+      <Signup googleUser={googleUser} /> :
       <div className="inner-box-element" id="googlebutton"/>
   )
 }
