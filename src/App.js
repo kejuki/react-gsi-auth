@@ -11,6 +11,10 @@ function App() {
   //to mimic account creation on backend
   initBackendMimic()
 
+  //renders google login button if user has not logged in
+  //renders sign up form if google user has not logged in previously
+  //renders users username and logout button if user has logged in
+
   return (
     <div className="App">
       <div id="inner-box">
