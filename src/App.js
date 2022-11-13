@@ -2,7 +2,7 @@ import { useState } from "react";
 import Login from "./components/Login"
 import Logout from "./components/Logout";
 import { UserContext } from "./contexts/UserContext";
-import {initBackendMimic} from "./routes/userRoutes"
+import { initBackendMimic } from "./routes/userRoutes"
 
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("currentUser")))

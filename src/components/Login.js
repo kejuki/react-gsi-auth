@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react"
 import jwt_decode from "jwt-decode";
-import axios from 'axios'
 import Signup from "./Signup";
 import { getUserById } from "../routes/userRoutes";
 import { UserContext } from "../contexts/UserContext";
@@ -23,7 +22,6 @@ const Login = () => {
         const currentUser = getUserById(credential.sub)
         setUser(currentUser)
         localStorage.setItem("currentUser", JSON.stringify(currentUser))
-        axios.defaults.headers.common['authetication'] = JSON.stringify(credential).slice(1,-1)
       } 
       else {
         setShowSignup(true)
