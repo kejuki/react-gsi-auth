@@ -1,10 +1,5 @@
-React + google gsi login & signup example
+Small react project using google gsi for login and sign up
 
 - login authentication with google gsi
 - account creation to the site with custom username
-- supports duplicate usernames
 - mimics rest endpoints with localstorage
-
-todo
-- backend
-- jwt cookie?
