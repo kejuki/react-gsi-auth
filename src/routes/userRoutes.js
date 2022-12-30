@@ -1,20 +1,28 @@
-//uses localstorage to mimic rest endpoints
-
-export const initBackendMimic = () => {
-  if(!localStorage.getItem("testAppUserDB"))
-    localStorage.setItem("testAppUserDB", JSON.stringify({userArray : []}))
+export const loginUser = async (googleUser) => {
+  return await fetch("http://localhost:3001/api/authenticate/",{
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({googleUser})
+  })
+  .then((res) => res.json())
+  .catch((err) => { console.error("Error: ", err);});
 }
 
-export const getAllUsers = () => {
-  return JSON.parse(localStorage.getItem("testAppUserDB")).userArray
-}
-
-export const getUserById = (id) => {
-  return JSON.parse(localStorage.getItem("testAppUserDB")).userArray.find(user => user.id === id)
-}
-
-export const createUser = (userObject) => {
-  const googleUsers = JSON.parse(localStorage.getItem("testAppUserDB")).userArray
-  const updatedGoogleUsers = [...googleUsers, userObject]
-  localStorage.setItem("testAppUserDB", JSON.stringify({userArray : updatedGoogleUsers}))
+export const signupUser = async (googleUser, username) => {
+  return await fetch("http://localhost:3001/api/authenticate/signup/",{
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      googleUser,
+      username,
+    })
+  })
+  .then((res) => res.json())
+  .catch((err) => { console.error("Error: ", err);});
 }

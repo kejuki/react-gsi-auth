@@ -2,14 +2,9 @@ import { useState } from "react";
 import Login from "./components/Login"
 import Logout from "./components/Logout";
 import { UserContext } from "./contexts/UserContext";
-import { initBackendMimic } from "./routes/userRoutes"
 
 function App() {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("currentUser")))
-
-  //makes localstorage object for all google accounts youll make testApp users with 
-  //to mimic account creation on backend
-  initBackendMimic()
+  const [user, setUser] = useState(null)
 
   //renders google login button if user has not logged in
   //renders sign up form if google user has not logged in previously
