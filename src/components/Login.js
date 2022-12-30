@@ -17,7 +17,7 @@ const Login = () => {
     const handleLogin = async (res) =>{
       setGoogleResponse(res)
       const currentUser = await loginUser(res)
-      if(currentUser) {
+      if(!currentUser?.signup) {
         setUser(currentUser)
       }
       else{
