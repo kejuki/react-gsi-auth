@@ -41,3 +41,13 @@ body{
   cursor: pointer;
   background: rgba(255,255,255,.32);
 }
+
+#profile{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+#username, #avatar{
+  padding: 12px;
+}

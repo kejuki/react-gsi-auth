@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Login from "./components/Login"
 import Logout from "./components/Logout";
+import Profile from "./components/Profile";
 import { UserContext } from "./contexts/UserContext";
 import { auth } from "./routes/userRoutes"
 
@@ -8,9 +9,7 @@ function App() {
   const [user, setUser] = useState(null)
 
   useEffect(()=>{
-    const checkLoginStatus = async () => {
-      setUser(await auth())
-    }
+    const checkLoginStatus = async () => setUser(await auth())
     checkLoginStatus()
   },[])
   //renders google login button if user has not logged in
@@ -25,11 +24,15 @@ function App() {
             <h1>Google login example</h1>
             <h3>Login with google account and signup to the site with it if its the 1st time logging in.</h3>
           </div>
-          <div className="inner-box-element">logged in user: {user?.user?.username} </div>
+          <div className="inner-box-element"></div>
           {
             !user?.authenticated ? 
             <Login/> :
-            <Logout />
+            <>
+              <Logout />
+              <Profile />
+            </>
+
           }
         </UserContext.Provider>
       </div>
